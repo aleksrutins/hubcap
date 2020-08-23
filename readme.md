@@ -1,3 +1,6 @@
 # hubcap
 ## A package manager for GitHub repositories
-Nothing here yet. Check back later.
+### Installation
+```sh
+$ npm install -g @munchkinhalfling/hubcap
+```
