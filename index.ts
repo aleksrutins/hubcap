@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import {Cli, Command} from 'clipanion';
 import * as yup from 'yup';
 
