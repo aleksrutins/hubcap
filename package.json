@@ -2,6 +2,7 @@
   "name": "@munchkinhalfling/hubcap",
   "version": "1.0.0",
   "description": "A package manager for GitHub",
+  "repository": "git://github.com/munchkinhalfling/hubcap.git",
   "main": "index.js",
   "author": "munchkinhalfling",
   "license": "GPL-3.0-or-later",
