@@ -1,6 +1,6 @@
 {
   "name": "@munchkinhalfling/hubcap",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A package manager for GitHub",
   "repository": "git://github.com/munchkinhalfling/hubcap.git",
   "main": "index.js",
@@ -8,17 +8,32 @@
   "license": "GPL-3.0-or-later",
   "module": true,
   "dependencies": {
-    "@types/node": "^14.6.0",
+    "axios": "^0.20.0",
+    "chalk": "^4.1.0",
     "clipanion": "^2.4.4",
-    "colors": "^1.4.0",
     "semver": "^7.3.2",
+    "shelljs": "^0.8.4",
+    "tar": "^6.0.5",
+    "yaml": "^1.10.0",
     "yup": "^0.29.3"
   },
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "lint": "tslint -p tsconfig.json",
+    "prepublishOnly": "npm run build"
   },
-  "bin": "index.js",
+  "bin": "lib/index.js",
   "devDependencies": {
+    "@types/node": "^14.6.0",
+    "@types/semver": "^7.3.3",
+    "@types/yup": "^0.29.6",
+    "prettier": "^2.0.5",
+    "tslint": "^6.1.3",
+    "tslint-config-prettier": "^1.18.0",
     "typescript": "^4.0.2"
-  }
+  },
+  "files": [
+    "lib/**/*"
+  ]
 }
