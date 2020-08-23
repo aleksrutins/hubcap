@@ -42,9 +42,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hubcap-pm@workspace:.":
+"hubcap@workspace:.":
   version: 0.0.0-use.local
-  resolution: "hubcap-pm@workspace:."
+  resolution: "hubcap@workspace:."
   dependencies:
     "@types/node": ^14.6.0
     clipanion: ^2.4.4
@@ -53,7 +53,7 @@ __metadata:
     typescript: ^4.0.2
     yup: ^0.29.3
   bin:
-    hubcap-pm: index.js
+    hubcap: index.js
   languageName: unknown
   linkType: soft
 

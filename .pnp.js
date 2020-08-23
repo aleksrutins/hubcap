@@ -19,14 +19,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
     ],
     "dependencyTreeRoots": [
       {
-        "name": "hubcap-pm",
+        "name": "hubcap",
         "reference": "workspace:."
       }
     ],
     "enableTopLevelFallback": true,
     "ignorePatternData": "(^(?:\\.yarn\\/sdks(?:\\/(?!\\.)(?:(?:(?!(?:^|\\/)\\.).)*?)|$))$)",
     "fallbackExclusionList": [
-      ["hubcap-pm", ["workspace:."]]
+      ["hubcap", ["workspace:."]]
     ],
     "fallbackPool": [
       [
@@ -117,11 +117,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
-      ["hubcap-pm", [
+      ["hubcap", [
         ["workspace:.", {
           "packageLocation": "./",
           "packageDependencies": [
-            ["hubcap-pm", "workspace:."],
+            ["hubcap", "workspace:."],
             ["@types/node", "npm:14.6.0"],
             ["clipanion", "npm:2.4.4"],
             ["colors", "npm:1.4.0"],

@@ -1,5 +1,5 @@
 {
-  "name": "hubcap-pm",
+  "name": "@munchkinhalfling/hubcap",
   "version": "1.0.0",
   "description": "A package manager for GitHub",
   "main": "index.js",
@@ -19,5 +19,8 @@
   "bin": "index.js",
   "devDependencies": {
     "typescript": "^4.0.2"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/munchkinhalfling"
   }
 }
