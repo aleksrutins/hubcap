@@ -14,6 +14,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@munchkinhalfling/hubcap@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@munchkinhalfling/hubcap@workspace:."
+  dependencies:
+    "@types/node": ^14.6.0
+    clipanion: ^2.4.4
+    colors: ^1.4.0
+    semver: ^7.3.2
+    typescript: ^4.0.2
+    yup: ^0.29.3
+  bin:
+    hubcap: index.js
+  languageName: unknown
+  linkType: soft
+
 "@types/node@npm:^14.6.0":
   version: 14.6.0
   resolution: "@types/node@npm:14.6.0"
@@ -41,21 +56,6 @@ __metadata:
   checksum: dd2190001862d3ea6d1f0788c58d083593166debfa65ff77473a3d37795548e92e5d050ca32f90781fa5c270901694c45022fc90ff2fa50f44aa302f20916589
   languageName: node
   linkType: hard
-
-"hubcap@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "hubcap@workspace:."
-  dependencies:
-    "@types/node": ^14.6.0
-    clipanion: ^2.4.4
-    colors: ^1.4.0
-    semver: ^7.3.2
-    typescript: ^4.0.2
-    yup: ^0.29.3
-  bin:
-    hubcap: index.js
-  languageName: unknown
-  linkType: soft
 
 "lodash-es@npm:^4.17.11":
   version: 4.17.15

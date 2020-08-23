@@ -19,14 +19,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
     ],
     "dependencyTreeRoots": [
       {
-        "name": "hubcap",
+        "name": "@munchkinhalfling/hubcap",
         "reference": "workspace:."
       }
     ],
     "enableTopLevelFallback": true,
     "ignorePatternData": "(^(?:\\.yarn\\/sdks(?:\\/(?!\\.)(?:(?:(?!(?:^|\\/)\\.).)*?)|$))$)",
     "fallbackExclusionList": [
-      ["hubcap", ["workspace:."]]
+      ["@munchkinhalfling/hubcap", ["workspace:."]]
     ],
     "fallbackPool": [
       [
@@ -81,6 +81,21 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["@munchkinhalfling/hubcap", [
+        ["workspace:.", {
+          "packageLocation": "./",
+          "packageDependencies": [
+            ["@munchkinhalfling/hubcap", "workspace:."],
+            ["@types/node", "npm:14.6.0"],
+            ["clipanion", "npm:2.4.4"],
+            ["colors", "npm:1.4.0"],
+            ["semver", "npm:7.3.2"],
+            ["typescript", "patch:typescript@npm%3A4.0.2#builtin<compat/typescript>::version=4.0.2&hash=5b02a2"],
+            ["yup", "npm:0.29.3"]
+          ],
+          "linkType": "SOFT",
+        }]
+      ]],
       ["@types/node", [
         ["npm:14.6.0", {
           "packageLocation": "./.yarn/cache/@types-node-npm-14.6.0-3b4a148c02-ff23553ab7.zip/node_modules/@types/node/",
@@ -115,21 +130,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["fn-name", "npm:3.0.0"]
           ],
           "linkType": "HARD",
-        }]
-      ]],
-      ["hubcap", [
-        ["workspace:.", {
-          "packageLocation": "./",
-          "packageDependencies": [
-            ["hubcap", "workspace:."],
-            ["@types/node", "npm:14.6.0"],
-            ["clipanion", "npm:2.4.4"],
-            ["colors", "npm:1.4.0"],
-            ["semver", "npm:7.3.2"],
-            ["typescript", "patch:typescript@npm%3A4.0.2#builtin<compat/typescript>::version=4.0.2&hash=5b02a2"],
-            ["yup", "npm:0.29.3"]
-          ],
-          "linkType": "SOFT",
         }]
       ]],
       ["lodash", [
