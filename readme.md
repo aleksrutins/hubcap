@@ -11,3 +11,6 @@ Hubcap installs each program in its own prefix and then symlinks the binaries. T
 ### Adding hubcap to your repository
 Create a file called `.hubcap/config.yml` in your repository on the `master` branch. See [the one in Bettermake](https://github.com/munchkinhalfling/bettermake/blob/master/.hubcap/config.yml) for an example and syntax. \
 Then, people can install your repo as detailed above. There is no central package submission database or anything, so that is all that is needed.
+
+### Contributing to a repository that uses hubcap
+You can install the dependencies of a local project by runing `hubcap depend` in the root directory of the project.

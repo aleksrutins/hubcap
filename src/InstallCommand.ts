@@ -7,12 +7,13 @@ import * as tar from 'tar';
 import { Readable } from 'stream';
 import runCommand from './runCommand';
 import * as path from 'path';
+import { installDependencies } from './dependencies';
 
 export class InstallCommand extends Command {
 	@Command.String({ required: true })
 	public repo!: string;
 
-	@Command.Path(`install`, `it`)
+	@Command.Path(`install`)
 	async execute() {
 		console.log(chalk`{bold.green Preparing directories...}`)
 		shell.rm('-rf', '/usr/local/hubcap/tmp-unpack');
@@ -30,6 +31,8 @@ export class InstallCommand extends Command {
 			console.log(chalk`{bold.red Error: {red ${e.toString()}}}`);
 			return 1;
 		}
+		console.log(chalk`{bold.green Installing dependencies...}`);
+		installDependencies(this, repoconf);
 		console.log(chalk`{bold.green Downloading sources...\nType: {red ${repoconf.sourceType}}}`);
 		switch (repoconf.sourceType) {
 			case "tgz":
