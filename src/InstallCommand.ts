@@ -2,11 +2,13 @@ import {Command} from 'clipanion';
 import * as YAML from 'yaml';
 import axios from 'axios';
 import * as chalk from 'chalk';
-import {RepoConfiguration, RepoConfigurationSchema} from './RepoConfiguration';
+import {RepoConfiguration, RepoConfigurationSchema, RepoConf, vars} from './RepoConfiguration';
 import * as shell from 'shelljs';
 import * as tar from 'tar';
 import * as fs from 'fs';
 import {Readable} from 'stream';
+import runCommand from './runCommand';
+import * as path from 'path';
 
 export class InstallCommand extends Command {
 	@Command.String({required: true})
@@ -14,10 +16,18 @@ export class InstallCommand extends Command {
 
 	@Command.Path(`install`)
 	async execute() {
+		console.log(chalk`{bold.green Preparing directories...}`)
+		shell.rm('-rf', '/usr/local/hubcap/tmp-unpack');
+		shell.mkdir('-p', '/usr/local/hubcap/tmp-unpack');
 		console.log(chalk`{bold.green Fetching manifest for GitHub repository {red ${this.repo}}...}`);
 		let repoconf: RepoConfiguration;
 		try {
-			repoconf = YAML.parse((await axios.get(`https://raw.githubusercontent.com/${this.repo}/master/.hubcap/config.yml`)).data);
+			repoconf = RepoConf.parse((await axios.get(`https://raw.githubusercontent.com/${this.repo}/master/.hubcap/config.yml`)).data);
+			RepoConfigurationSchema.validate(repoconf).catch(error => {
+				console.log(chalk`{bold.red ${error.name}:}`);
+				error.errors.forEach(err => console.log(chalk`- {underline.red ${err}}`));
+				shell.exit(1);
+			});
 		} catch(e) {
 			console.log(chalk`{bold.red Error: {red ${e.toString()}}}`);
 			return 1;
@@ -28,9 +38,9 @@ export class InstallCommand extends Command {
 				console.log(chalk`{bold.green Downloading {red ${repoconf.source}}...}`);
 				let srcstr = (await axios.get(repoconf.source)).data;
 				console.log(chalk`{bold.green Unpacking...}`);
-				shell.mkdir('~/.hubcap-tmp-unpack');
+				shell.mkdir('/usr/local/hubcap/tmp-unpack');
 				Readable.from([srcstr]).pipe(tar.x({
-					C: '~/.hubcap-tmp-unpack'
+					C: '/usr/local/hubcap/tmp-unpack'
 				}));
 				break;
 			case "zip":
@@ -38,7 +48,7 @@ export class InstallCommand extends Command {
 				return 1;
 			case "git":
 				console.log(chalk`{bold.green Cloning {reset.red ${repoconf.source}}...}`);
-				let res = shell.exec(`git clone ${repoconf.source} ~/.hubcap-tmp-unpack`);
+				let res = runCommand(`git clone ${repoconf.source} /usr/local/hubcap/tmp-unpack`);
 				if(res != 0) {
 					console.log(chalk`{bold.red Error: {red Error running git}}`);
 					return res;
@@ -48,7 +58,19 @@ export class InstallCommand extends Command {
 				console.log(chalk`{bold.red Error: {red sourceType must be one of: 'git', 'tgz', 'zip'}}`);
 				return 1;
 		}
-		console.log(chalk`{bold.green Running script {red build}...}`);
-		
+		for(let script in repoconf.scripts) {
+			console.log(chalk`{bold.green Running script} {red ${script}}{bold.green ...}`);
+			let res = repoconf.runScript(script);
+			if(res[0] != 0) {
+				console.log(chalk`{bold.red Error ${res[0]}:} {red ${res[1]}}`);
+				return res[0];
+			}
+		}
+		console.log(chalk`{bold.green Creating symlinks...}`);
+		let actVars = vars(this.repo);
+		for(let binary in repoconf.bin) {
+			console.log(chalk`{red /usr/bin/${binary}} {bold.green =>} {red ${path.join(actVars.PREFIX, repoconf.bin[binary])}}`);
+			shell.ln('-sf', path.join(actVars.PREFIX, repoconf.bin[binary]), `/usr/bin/${binary}`);
+		}
 	}
 }
