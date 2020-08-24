@@ -1,0 +1,16 @@
+default: build
+env: ""
+tasks:
+  - name: build
+    description: Compile Typescript
+    commands:
+      - npx tsc
+  - name: install
+    depends: [build]
+    description: Install via npm
+    commands:
+      - npm i -g .
+  - name: depend
+    description: Install dependencies
+    commands:
+      - npm i
