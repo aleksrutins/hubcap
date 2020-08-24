@@ -11,7 +11,6 @@
     "axios": "^0.20.0",
     "chalk": "^4.1.0",
     "clipanion": "^2.4.4",
-    "semver": "^7.3.2",
     "shelljs": "^0.8.4",
     "tar": "^6.0.5",
     "yaml": "^1.10.0",
@@ -26,7 +25,6 @@
   "bin": "lib/index.js",
   "devDependencies": {
     "@types/node": "^14.6.0",
-    "@types/semver": "^7.3.3",
     "@types/yup": "^0.29.6",
     "prettier": "^2.0.5",
     "tslint": "^6.1.3",

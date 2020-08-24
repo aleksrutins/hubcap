@@ -1,6 +1,5 @@
 import * as yup from 'yup';
 import * as YAML from 'yaml';
-import * as semver from 'semver';
 import * as shell from 'shelljs';
 import runCommand from './runCommand';
 export type ScriptResult = [number, string];
@@ -28,7 +27,6 @@ export namespace RepoConf {
 }
 export interface RepoConfiguration {
 	name: string;
-	version: string;
 	scripts: {
 		build: string[];
 		preinstall: string[];
@@ -46,11 +44,6 @@ export interface RepoConfiguration {
 
 export const RepoConfigurationSchema = yup.object().shape({
 	name: yup.string().required(),
-	version: yup.string().required().test(
-		'is-valid-semver',
-		'${path} is not a valid Semantic Version',
-		(ver: string | null | undefined) => (semver.valid(ver) == ver)
-		),
 	scripts: yup.object().required().shape({
 		build: yup.array().ensure().of(yup.string()),
 		preinstall: yup.array().ensure().of(yup.string()),
