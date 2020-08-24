@@ -32,7 +32,7 @@ export class InstallCommand extends Command {
 			return 1;
 		}
 		console.log(chalk`{bold.green Installing dependencies...}`);
-		installDependencies(this, repoconf);
+		await installDependencies(this, repoconf);
 		console.log(chalk`{bold.green Downloading sources...\nType: {red ${repoconf.sourceType}}}`);
 		switch (repoconf.sourceType) {
 			case "tgz":
