@@ -24,6 +24,7 @@ export namespace RepoConf {
 		return conf;
 	}
 }
+
 export interface RepoConfiguration {
 	name: string;
 	scripts: {
@@ -37,7 +38,8 @@ export interface RepoConfiguration {
 	source: string;
 	bin: {
 		[binName: string]: string;
-	}
+	};
+	depends: string[];
 	runScript(scriptName: string): ScriptResult;
 }
 
@@ -50,6 +52,7 @@ export const RepoConfigurationSchema = yup.object().shape({
 		postinstall: yup.array().ensure().of(yup.string())
 	}),
 	bin: yup.object(),
+	depends: yup.array().ensure().of(yup.string()),
 	sourceType: yup.string().required().matches(/^(git|tgz|zip)$/),
 	source: yup.string().required()
 });

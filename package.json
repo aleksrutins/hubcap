@@ -16,12 +16,7 @@
     "yaml": "^1.10.0",
     "yup": "^0.29.3"
   },
-  "scripts": {
-    "build": "tsc",
-    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
-    "lint": "tslint -p tsconfig.json",
-    "prepublishOnly": "npm run build"
-  },
+  "scripts": {},
   "bin": "lib/index.js",
   "devDependencies": {
     "@types/node": "^14.6.0",

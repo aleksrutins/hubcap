@@ -1,5 +1,7 @@
 default: build
-env: ""
+env: |
+  version=${version:-patch}
+  message=${message:-$version}
 tasks:
   - name: build
     description: Compile Typescript
@@ -14,3 +16,9 @@ tasks:
     description: Install dependencies
     commands:
       - npm i
+  - name: publish
+    description: Publish to npm
+    depends: [build]
+    commands:
+      - smartver $version $message
+      - npm publish

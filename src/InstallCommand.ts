@@ -12,7 +12,7 @@ export class InstallCommand extends Command {
 	@Command.String({ required: true })
 	public repo!: string;
 
-	@Command.Path(`install`)
+	@Command.Path(`install`, `it`)
 	async execute() {
 		console.log(chalk`{bold.green Preparing directories...}`)
 		shell.rm('-rf', '/usr/local/hubcap/tmp-unpack');
