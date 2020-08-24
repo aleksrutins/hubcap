@@ -1,7 +1,6 @@
 #!/usr/bin/env node
-import {Cli} from 'clipanion';
-import * as yup from 'yup';
-import {InstallCommand} from './InstallCommand'
+import { Cli } from 'clipanion';
+import { InstallCommand } from './InstallCommand'
 
 const cli = new Cli({
     binaryLabel: `Hubcap`,

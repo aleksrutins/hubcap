@@ -1,6 +1,5 @@
 import * as yup from 'yup';
 import * as YAML from 'yaml';
-import * as shell from 'shelljs';
 import runCommand from './runCommand';
 export type ScriptResult = [number, string];
 export const vars = (repoName: string) => ({
@@ -10,13 +9,13 @@ export namespace RepoConf {
 	export function parse(stuff: string): RepoConfiguration {
 		let conf: RepoConfiguration = YAML.parse(stuff);
 		conf.runScript = script => {
-			if(!conf.scripts[script]) return [1, "No such script"];
+			if (!conf.scripts[script]) return [1, "No such script"];
 			for (let cmd of conf.scripts[script]) {
-				for(let vari in vars(conf.name)) {
+				for (let vari in vars(conf.name)) {
 					cmd = cmd.replace(`\$(${vari})`, vars(conf.name)[vari]);
 				}
-				let res = runCommand(cmd, {cwd: '/usr/local/hubcap/tmp-unpack'});
-				if(res != 0) {
+				let res = runCommand(cmd, { cwd: '/usr/local/hubcap/tmp-unpack' });
+				if (res != 0) {
 					return [res, "Error in command"];
 				};
 			}
