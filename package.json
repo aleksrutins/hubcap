@@ -1,6 +1,6 @@
 {
   "name": "@munchkinhalfling/hubcap",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "A package manager for GitHub",
   "repository": "git://github.com/munchkinhalfling/hubcap.git",
   "main": "index.js",
