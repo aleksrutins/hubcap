@@ -2,7 +2,7 @@
 import { Cli, Command } from 'clipanion';
 import { InstallCommand } from './InstallCommand';
 import { DependCommand } from './dependencies';
-
+import { HelpCommand } from "./HelpCommand";
 
 const cli = new Cli({
     binaryLabel: `Hubcap`,
@@ -12,7 +12,7 @@ const cli = new Cli({
 
 cli.register(InstallCommand);
 cli.register(DependCommand);
-cli.register(Command.Entries.Help);
+cli.register(HelpCommand);
 cli.register(Command.Entries.Version);
 
 cli.runExit(process.argv.slice(2), {
