@@ -8,6 +8,7 @@
   "license": "GPL-3.0-or-later",
   "module": true,
   "dependencies": {
+    "ansi-escapes": "^4.3.1",
     "axios": "^0.20.0",
     "chalk": "^4.1.0",
     "clipanion": "^2.4.4",

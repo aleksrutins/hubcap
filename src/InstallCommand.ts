@@ -8,6 +8,7 @@ import { Readable } from 'stream';
 import runCommand from './runCommand';
 import * as path from 'path';
 import { installDependencies } from './dependencies';
+import * as escapes from "ansi-escapes";
 
 export class InstallCommand extends Command {
 	@Command.String({ required: true })
@@ -32,7 +33,10 @@ export class InstallCommand extends Command {
 			return 1;
 		}
 		console.log(chalk`{bold.green Installing dependencies...}`);
+		process.stdout.write(escapes.cursorSavePosition);
 		await installDependencies(this, repoconf);
+		process.stdout.write(escapes.cursorRestorePosition);
+		process.stdout.write(escapes.eraseDown);
 		console.log(chalk`{bold.green Downloading sources...\nType: {red ${repoconf.sourceType}}}`);
 		switch (repoconf.sourceType) {
 			case "tgz":
@@ -43,12 +47,15 @@ export class InstallCommand extends Command {
 				Readable.from([srcstr]).pipe(tar.x({
 					C: '/usr/local/hubcap/tmp-unpack'
 				}));
+				process.stdout.write(escapes.cursorSavePosition);
 				break;
 			case "zip":
 				console.log(chalk`{bold.red Error: {red Reading from zip not implemented yet}}`);
+				process.stdout.write(escapes.cursorSavePosition);
 				return 1;
 			case "git":
 				console.log(chalk`{bold.green Cloning {reset.red ${repoconf.source}}...}`);
+				process.stdout.write(escapes.cursorSavePosition);
 				let res = runCommand(`git clone ${repoconf.source} /usr/local/hubcap/tmp-unpack`);
 				if (res != 0) {
 					console.log(chalk`{bold.red Error: {red Error running git}}`);
@@ -59,13 +66,18 @@ export class InstallCommand extends Command {
 				console.log(chalk`{bold.red Error: {red sourceType must be one of: 'git', 'tgz', 'zip'}}`);
 				return 1;
 		}
+		process.stdout.write(escapes.cursorRestorePosition);
+		process.stdout.write(escapes.eraseDown);
 		for (let script in repoconf.scripts) {
 			console.log(chalk`{bold.green Running script} {red ${script}}{bold.green ...}`);
+			process.stdout.write(escapes.cursorSavePosition);
 			let res = repoconf.runScript(script);
 			if (res[0] != 0) {
 				console.log(chalk`{bold.red Error ${res[0]}:} {red ${res[1]}}`);
 				return res[0];
 			}
+			process.stdout.write(escapes.cursorRestorePosition);
+			process.stdout.write(escapes.eraseDown);
 		}
 		console.log(chalk`{bold.green Creating symlinks...}`);
 		let actVars = vars(this.repo);
