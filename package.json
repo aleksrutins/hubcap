@@ -3,13 +3,13 @@
   "version": "1.4.4",
   "description": "A package manager for GitHub",
   "repository": "git://github.com/aleksrutins/hubcap.git",
-  "main": "index.js",
+  "main": "lib/index.js",
   "author": "Aleks Rutins <alex@rutins.com>",
   "license": "GPL-3.0-or-later",
   "module": true,
   "dependencies": {
     "ansi-escapes": "^4.3.1",
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "chalk": "^4.1.0",
     "clipanion": "^2.4.4",
     "shelljs": "^0.8.4",
@@ -17,7 +17,9 @@
     "yaml": "^1.10.0",
     "yup": "^0.29.3"
   },
-  "scripts": {},
+  "scripts": {
+    "build": "tsc"
+  },
   "bin": "lib/index.js",
   "devDependencies": {
     "@types/node": "^14.6.0",
