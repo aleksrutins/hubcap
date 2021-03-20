@@ -1,10 +1,10 @@
 {
-  "name": "@munchkinhalfling/hubcap",
+  "name": "@aleksrutins/hubcap",
   "version": "1.4.4",
   "description": "A package manager for GitHub",
-  "repository": "git://github.com/munchkinhalfling/hubcap.git",
+  "repository": "git://github.com/aleksrutins/hubcap.git",
   "main": "index.js",
-  "author": "munchkinhalfling",
+  "author": "Aleks Rutins <alex@rutins.com>",
   "license": "GPL-3.0-or-later",
   "module": true,
   "dependencies": {
